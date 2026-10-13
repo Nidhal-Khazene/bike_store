@@ -46,6 +46,7 @@ class CustomIconContainer extends StatelessWidget {
           borderRadius:
               borderRadius ?? BorderRadius.circular(effectiveSize * 0.28),
           border: border,
+          boxShadow: boxShadow,
         ),
         child: Center(
           child: IconTheme(
