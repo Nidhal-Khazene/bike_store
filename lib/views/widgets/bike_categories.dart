@@ -179,7 +179,7 @@ class _BikeCategoriesState extends State<BikeCategories> {
   ];
 
   /// Vertical upward shift applied to each successive chip (staircase).
-  static const double _stepDy = 10.0;
+  static const double _stepDy = 15.0;
 
   String _selectedId = 'all';
 
@@ -195,27 +195,25 @@ class _BikeCategoriesState extends State<BikeCategories> {
     final double totalHeight = chipSize + (_categories.length - 1) * _stepDy;
 
     return SizedBox(
+      width: double.infinity,
       height: totalHeight,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            for (int i = 0; i < _categories.length; i++) ...[
-              // Each chip is shifted upward by i × _stepDy (staircase).
-              Transform.translate(
-                offset: Offset(0, -(i * _stepDy)),
-                child: _CategoryItemWidget(
-                  category: _categories[i],
-                  isSelected: _selectedId == _categories[i].id,
-                  onTap: () => _onSelect(_categories[i]),
-                ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          for (int i = 0; i < _categories.length; i++) ...[
+            // Each chip is shifted upward by i × _stepDy (staircase).
+            Transform.translate(
+              offset: Offset(0, -(i * _stepDy)),
+              child: _CategoryItemWidget(
+                category: _categories[i],
+                isSelected: _selectedId == _categories[i].id,
+                onTap: () => _onSelect(_categories[i]),
               ),
-              if (i < _categories.length - 1) Gap(12.w),
-            ],
+            ),
+            if (i < _categories.length - 1) Gap(12.w),
           ],
-        ),
+        ],
       ),
     );
   }
