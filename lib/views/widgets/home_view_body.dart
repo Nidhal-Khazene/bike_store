@@ -1,7 +1,11 @@
 import 'package:bike_store/core/utils/app_text_styles.dart';
 import 'package:bike_store/core/utils/assets.dart';
+import 'package:bike_store/shared/widgets/bike_container_presenter.dart';
+import 'package:bike_store/shared/widgets/custom_icon_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:svg_flutter/svg.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -25,17 +29,25 @@ class HomeViewBody extends StatelessWidget {
           left: 0,
           right: 0,
           child: Padding(
-            padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 64.h),
+            padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 72.h),
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Choose Your Bike',
                       style: AppTextStyles.bold20.copyWith(color: Colors.white),
                     ),
+                    CustomIconContainer(
+                      icon: SvgPicture.asset(
+                        Assets.assetsImagesIconsSearchIcon,
+                      ),
+                    ),
                   ],
                 ),
+                Gap(32),
+                const BikeContainerPresenter(),
               ],
             ),
           ),
