@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppTextStyles {
   // Bold
-  static const TextStyle bold15 = TextStyle(
-    fontSize: 15,
+  static TextStyle get bold15 => TextStyle(
+    fontSize: 15.sp,
     fontWeight: FontWeight.bold,
   );
-  static const TextStyle bold17 = TextStyle(
-    fontSize: 17,
+  static TextStyle get bold17 => TextStyle(
+    fontSize: 17.sp,
     fontWeight: FontWeight.bold,
   );
-  static const TextStyle bold20 = TextStyle(
-    fontSize: 20,
+  static TextStyle get bold20 => TextStyle(
+    fontSize: 20.sp,
     fontWeight: FontWeight.bold,
   );
-  static const TextStyle bold26 = TextStyle(
-    fontSize: 26,
+  static TextStyle get bold26 => TextStyle(
+    fontSize: 26.sp,
     fontWeight: FontWeight.bold,
   );
   // Meduim
-  static const TextStyle medium13 = TextStyle(
-    fontSize: 13,
+  static TextStyle get medium13 => TextStyle(
+    fontSize: 13.sp,
     fontWeight: FontWeight.w500,
   );
-  static const TextStyle medium15 = TextStyle(
-    fontSize: 15,
+  static TextStyle get medium15 => TextStyle(
+    fontSize: 15.sp,
     fontWeight: FontWeight.w500,
   );
   // Regular
-  static const TextStyle regular = TextStyle(
-    fontSize: 20,
+  static TextStyle get regular => TextStyle(
+    fontSize: 20.sp,
     fontWeight: FontWeight.w400,
   );
-  static const TextStyle regular24 = TextStyle(
-    fontSize: 24,
+  static TextStyle get regular24 => TextStyle(
+    fontSize: 24.sp,
     fontWeight: FontWeight.w400,
   );
 }
