@@ -1,7 +1,7 @@
 import 'package:bike_store/core/utils/app_text_styles.dart';
 import 'package:bike_store/core/utils/assets.dart';
-import 'package:bike_store/shared/widgets/bike_container_presenter.dart';
 import 'package:bike_store/shared/widgets/custom_icon_container.dart';
+import 'package:bike_store/views/widgets/bike_promotion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -46,8 +46,8 @@ class HomeViewBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                Gap(32),
-                const BikeContainerPresenter(),
+                const Gap(32),
+                const BikePromotionCard(),
               ],
             ),
           ),
