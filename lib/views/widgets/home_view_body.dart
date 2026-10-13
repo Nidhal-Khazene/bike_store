@@ -8,7 +8,7 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned(
+        Positioned.fill(
           top: MediaQuery.sizeOf(context).height * .2,
           bottom: 0,
           right: 0,
