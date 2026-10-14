@@ -1,12 +1,11 @@
-import 'package:bike_store/core/utils/app_text_styles.dart';
 import 'package:bike_store/core/utils/assets.dart';
-import 'package:bike_store/shared/widgets/custom_icon_container.dart';
 import 'package:bike_store/views/widgets/bike_categories.dart';
 import 'package:bike_store/views/widgets/bike_promotion_card.dart';
+import 'package:bike_store/views/widgets/home_app_bar.dart';
+import 'package:bike_store/views/widgets/products_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:svg_flutter/svg.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -29,30 +28,17 @@ class HomeViewBody extends StatelessWidget {
           top: 0,
           left: 0,
           right: 0,
+          bottom: 0,
           child: Padding(
-            padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 72.h),
-            child: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 64.h),
+            child: const SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Choose Your Bike',
-                        style: AppTextStyles.bold20.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      CustomIconContainer(
-                        icon: SvgPicture.asset(
-                          Assets.assetsImagesIconsSearchIcon,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Gap(32),
-                  const BikePromotionCard(),
-                  const BikeCategories(),
+                  HomeAppBar(),
+                  Gap(24),
+                  BikePromotionCard(),
+                  BikeCategories(),
+                  ProductsGridView(),
                 ],
               ),
             ),
