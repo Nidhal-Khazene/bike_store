@@ -10,6 +10,10 @@ class Assets {
   /// assets/images/component/blue_bg.png
   static const String assetsImagesComponentBlueBg = "assets/images/component/blue_bg.png";
 
+  /// Assets for assetsImagesComponentBottomNavBarBg
+  /// assets/images/component/bottom_nav_bar_bg.png
+  static const String assetsImagesComponentBottomNavBarBg = "assets/images/component/bottom_nav_bar_bg.png";
+
   /// Assets for assetsImagesComponentElectricBicycle
   /// assets/images/component/electric_bicycle.png
   static const String assetsImagesComponentElectricBicycle = "assets/images/component/electric_bicycle.png";
