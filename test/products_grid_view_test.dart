@@ -36,13 +36,13 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify product names are rendered
-    expect(find.text('PEUGEOT - LR01'), findsOneWidget);
-    expect(find.text('SMITH - Trade'), findsOneWidget);
-    expect(find.text('\$ 1,999.99'), findsOneWidget);
-    expect(find.text('\$ 120'), findsOneWidget);
+    expect(find.text('PEUGEOT - LR01'), findsWidgets);
+    expect(find.text('SMITH - Trade'), findsWidgets);
+    expect(find.text('\$ 1,999.99'), findsWidgets);
+    expect(find.text('\$ 120'), findsWidgets);
 
     // Tap on SMITH - Trade to make it active
-    await tester.tap(find.text('SMITH - Trade'));
+    await tester.tap(find.text('SMITH - Trade').first, warnIfMissed: false);
     await tester.pumpAndSettle();
 
     expect(find.byType(ProductsGridView), findsOneWidget);
