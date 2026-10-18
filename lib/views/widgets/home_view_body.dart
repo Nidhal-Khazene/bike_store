@@ -5,7 +5,6 @@ import 'package:bike_store/views/widgets/home_app_bar.dart';
 import 'package:bike_store/views/widgets/products_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -25,7 +24,16 @@ class HomeViewBody extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 0,
+          top: 64,
+          left: 0,
+          right: 0,
+          child: Padding(
+            padding: EdgeInsets.only(left: 16.w, right: 16.w),
+            child: const HomeAppBar(),
+          ),
+        ),
+        Positioned(
+          top: 64,
           left: 0,
           right: 0,
           bottom: 0,
@@ -34,8 +42,6 @@ class HomeViewBody extends StatelessWidget {
             child: const SingleChildScrollView(
               child: Column(
                 children: [
-                  HomeAppBar(),
-                  Gap(24),
                   BikePromotionCard(),
                   BikeCategories(),
                   ProductsGridView(),
