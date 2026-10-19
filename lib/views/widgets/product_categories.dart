@@ -12,12 +12,12 @@ import 'package:svg_flutter/svg.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 
 /// Represents a single bike category item.
-class BikeCategory {
+class ProductCategory {
   final String id;
   final String? label;
   final String? iconPath;
 
-  const BikeCategory({required this.id, this.label, this.iconPath})
+  const ProductCategory({required this.id, this.label, this.iconPath})
     : assert(
         label != null || iconPath != null,
         'A BikeCategory must have at least a label or an iconPath.',
@@ -74,11 +74,11 @@ class _CategoryIcon extends StatelessWidget {
 // L — Liskov: _AllLabel and _CategoryIcon are substitutable Widget children.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/// Renders a single category chip based on [BikeCategory]:
+/// Renders a single category chip based on [ProductCategory]:
 /// • "All" pill → primary gradient [CustomIconContainer] with white text
 /// • Icon items → dark slate-navy gradient [CustomIconContainer] matching new design
 class _CategoryItemWidget extends StatelessWidget {
-  final BikeCategory category;
+  final ProductCategory category;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -157,7 +157,7 @@ class _CategoryItemWidget extends StatelessWidget {
 /// Horizontally scrollable category row with a staircase visual effect.
 class BikeCategories extends StatefulWidget {
   /// Notified whenever the active category changes.
-  final ValueChanged<BikeCategory>? onCategorySelected;
+  final ValueChanged<ProductCategory>? onCategorySelected;
 
   const BikeCategories({super.key, this.onCategorySelected});
 
@@ -167,15 +167,21 @@ class BikeCategories extends StatefulWidget {
 
 class _BikeCategoriesState extends State<BikeCategories> {
   // ── I — Interface Segregation: state only knows the model list. ─────────────
-  static const List<BikeCategory> _categories = [
-    BikeCategory(id: 'all', label: 'All'),
-    BikeCategory(id: 'bicycle', iconPath: Assets.assetsImagesIconsBicycleIcon),
-    BikeCategory(id: 'road', iconPath: Assets.assetsImagesIconsRoadIcon),
-    BikeCategory(
+  static const List<ProductCategory> _categories = [
+    ProductCategory(id: 'all', label: 'All'),
+    ProductCategory(
+      id: 'bicycle',
+      iconPath: Assets.assetsImagesIconsBicycleIcon,
+    ),
+    ProductCategory(id: 'road', iconPath: Assets.assetsImagesIconsRoadIcon),
+    ProductCategory(
       id: 'mountain',
       iconPath: Assets.assetsImagesIconsMountainIcon,
     ),
-    BikeCategory(id: 'helmet', iconPath: Assets.assetsImagesIconsBikeHatIcon),
+    ProductCategory(
+      id: 'helmet',
+      iconPath: Assets.assetsImagesIconsBikeHatIcon,
+    ),
   ];
 
   /// Vertical upward shift applied to each successive chip (staircase).
@@ -183,7 +189,7 @@ class _BikeCategoriesState extends State<BikeCategories> {
 
   String _selectedId = 'all';
 
-  void _onSelect(BikeCategory category) {
+  void _onSelect(ProductCategory category) {
     if (_selectedId == category.id) return;
     setState(() => _selectedId = category.id);
     widget.onCategorySelected?.call(category);

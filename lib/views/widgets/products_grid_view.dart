@@ -1,4 +1,5 @@
 import 'package:bike_store/core/utils/assets.dart';
+import 'package:bike_store/views/product_details_view.dart';
 import 'package:bike_store/views/widgets/product_card_widget.dart';
 import 'package:bike_store/views/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +132,13 @@ class _ProductsGridViewState extends State<ProductsGridView> {
         return item.copyWith(isActive: item.id == tappedId);
       }).toList();
     });
-    widget.onProductSelected?.call(_items[index]);
+    final ProductItem selectedProduct = _items[index];
+    widget.onProductSelected?.call(selectedProduct);
+    Navigator.pushNamed(
+      context,
+      ProductDetailsView.routeName,
+      arguments: selectedProduct,
+    );
   }
 
   void _onFavoriteTap(int index) {

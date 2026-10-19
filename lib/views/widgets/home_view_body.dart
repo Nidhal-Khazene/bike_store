@@ -1,5 +1,5 @@
 import 'package:bike_store/core/utils/assets.dart';
-import 'package:bike_store/views/widgets/bike_categories.dart';
+import 'package:bike_store/views/widgets/product_categories.dart';
 import 'package:bike_store/views/widgets/bike_promotion_card.dart';
 import 'package:bike_store/views/widgets/home_app_bar.dart';
 import 'package:bike_store/views/widgets/products_grid_view.dart';
