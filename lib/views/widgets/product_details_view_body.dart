@@ -1,6 +1,7 @@
 import 'package:bike_store/core/utils/app_text_styles.dart';
 import 'package:bike_store/core/utils/assets.dart';
 import 'package:bike_store/shared/widgets/custom_icon_container.dart';
+import 'package:bike_store/views/widgets/product_details_custom_bottom_sheet.dart';
 import 'package:bike_store/views/widgets/product_item.dart';
 import 'package:bike_store/views/widgets/sliding_product.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +49,14 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
                 },
                 icon: SvgPicture.asset(Assets.assetsImagesIconsArowwLeftIcon),
               ),
-              Text(
-                'PEUGEOT - LR01',
-                style: AppTextStyles.bold20.copyWith(
-                  letterSpacing: -0.30,
-                  color: Colors.white,
+              Expanded(
+                child: Text(
+                  widget.product?.name ?? 'PEUGEOT - LR01',
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.bold20.copyWith(
+                    letterSpacing: -0.30,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(width: 44),
@@ -64,6 +68,12 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
             slidingAnimation: slidingAnimation,
             productImage: widget.product!.imagePath,
           ),
+        ),
+        const Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: ProductDetailsCustomBottomSheet(),
         ),
       ],
     );
