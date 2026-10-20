@@ -111,4 +111,37 @@ void main() {
       expect(slidingProduct.isExpanded, isFalse);
     },
   );
+
+  testWidgets(
+    'ProductDetailsViewBody configures and runs sliding animation for bottom sheet',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(
+        ScreenUtilInit(
+          designSize: const Size(375, 812),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return MaterialApp(
+              theme: AppTheme.themeData,
+              home: const Scaffold(
+                body: ProductDetailsViewBody(),
+              ),
+            );
+          },
+        ),
+      );
+
+      // Frame 0: bottom sheet starts at Offset(0, 1)
+      await tester.pump();
+      final ProductDetailsCustomBottomSheet sheet = tester.widget(
+        find.byType(ProductDetailsCustomBottomSheet),
+      );
+      expect(sheet.slidingAnimation, isNotNull);
+      expect(sheet.slidingAnimation!.value, const Offset(0, 1));
+
+      // After settling, animation reaches Offset.zero
+      await tester.pumpAndSettle();
+      expect(sheet.slidingAnimation!.value, Offset.zero);
+    },
+  );
 }

@@ -10,6 +10,7 @@ import 'package:gap/gap.dart';
 class ProductDetailsCustomBottomSheet extends StatefulWidget {
   const ProductDetailsCustomBottomSheet({
     super.key,
+    this.slidingAnimation,
     this.product,
     this.initialIndex,
     this.onTabChanged,
@@ -20,6 +21,7 @@ class ProductDetailsCustomBottomSheet extends StatefulWidget {
     this.onAddToCart,
   });
 
+  final Animation<Offset>? slidingAnimation;
   final ProductItem? product;
   final int? initialIndex;
   final ValueChanged<int>? onTabChanged;
@@ -90,7 +92,7 @@ class _ProductDetailsCustomBottomSheetState
     final double effectiveExpandedHeight =
         widget.expandedHeight ?? (screenHeight * 0.55);
 
-    return AnimatedContainer(
+    final Widget sheet = AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       clipBehavior: Clip.antiAlias,
@@ -174,6 +176,18 @@ class _ProductDetailsCustomBottomSheetState
         ),
       ),
     );
+
+    if (widget.slidingAnimation != null) {
+      return AnimatedBuilder(
+        animation: widget.slidingAnimation!,
+        builder: (context, _) => SlideTransition(
+          position: widget.slidingAnimation!,
+          child: sheet,
+        ),
+      );
+    }
+
+    return sheet;
   }
 
   Widget _buildTabContent() {

@@ -5,6 +5,7 @@ import 'package:bike_store/views/my_shopping_cart_view.dart';
 import 'package:bike_store/views/widgets/product_details_custom_bottom_sheet.dart';
 import 'package:bike_store/views/widgets/product_item.dart';
 import 'package:bike_store/views/widgets/sliding_product.dart';
+import 'package:bike_store/views/widgets/sliding_product_details_second_bg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:svg_flutter/svg.dart';
@@ -21,12 +22,14 @@ class ProductDetailsViewBody extends StatefulWidget {
 class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
-  late Animation<Offset> slidingAnimation;
+  late Animation<Offset> productSlidingAnimation;
+  late Animation<Offset> bgSlidingAnimation;
+  late Animation<Offset> bottomSheetSlidingAnimation;
   bool isExpanded = false;
   @override
   void initState() {
     super.initState();
-    initSlidingAnimation();
+    initSlidingAnimations();
   }
 
   @override
@@ -49,6 +52,12 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
       },
       child: Stack(
         children: [
+          Positioned.fill(
+            top: -50.h,
+            child: SlidingProductDetailsSecondBg(
+              slidingAnimation: bgSlidingAnimation,
+            ),
+          ),
           Positioned(
             top: 64,
             left: 16,
@@ -91,7 +100,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
           ),
           Positioned(
             child: SlidingProduct(
-              slidingAnimation: slidingAnimation,
+              slidingAnimation: productSlidingAnimation,
               productImage:
                   widget.product?.imagePath ??
                   Assets.assetsImagesComponentRobertBicycle,
@@ -103,6 +112,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
             right: 0,
             bottom: 0,
             child: ProductDetailsCustomBottomSheet(
+              slidingAnimation: bottomSheetSlidingAnimation,
               product: widget.product,
               isExpanded: isExpanded,
               onExpandedChanged: (value) {
@@ -120,13 +130,21 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
     );
   }
 
-  void initSlidingAnimation() {
+  void initSlidingAnimations() {
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );
-    slidingAnimation = Tween<Offset>(
+    productSlidingAnimation = Tween<Offset>(
       begin: const Offset(-2, -0.2),
+      end: Offset.zero,
+    ).animate(animationController);
+    bgSlidingAnimation = Tween<Offset>(
+      begin: const Offset(2, 0),
+      end: Offset.zero,
+    ).animate(animationController);
+    bottomSheetSlidingAnimation = Tween<Offset>(
+      begin: const Offset(0, 1),
       end: Offset.zero,
     ).animate(animationController);
     animationController.forward();

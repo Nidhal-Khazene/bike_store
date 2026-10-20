@@ -221,4 +221,55 @@ void main() {
       expect(addedToCart, isTrue);
     },
   );
+
+  testWidgets(
+    'ProductDetailsCustomBottomSheet wraps content with SlideTransition when slidingAnimation is provided',
+    (WidgetTester tester) async {
+      final controller = AnimationController(
+        vsync: const TestVSync(),
+        duration: const Duration(milliseconds: 1000),
+      );
+      final animation = Tween<Offset>(
+        begin: const Offset(0, 1),
+        end: Offset.zero,
+      ).animate(controller);
+
+      await tester.pumpWidget(
+        ScreenUtilInit(
+          designSize: const Size(375, 812),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return MaterialApp(
+              theme: AppTheme.themeData,
+              home: Scaffold(
+                body: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ProductDetailsCustomBottomSheet(
+                    slidingAnimation: animation,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
+
+      final slideTransitionFinder = find.descendant(
+        of: find.byType(ProductDetailsCustomBottomSheet),
+        matching: find.byType(SlideTransition),
+      );
+      expect(slideTransitionFinder, findsOneWidget);
+
+      final SlideTransition slideTransition =
+          tester.widget(slideTransitionFinder);
+      expect(slideTransition.position.value, const Offset(0, 1));
+
+      controller.forward();
+      await tester.pumpAndSettle();
+
+      expect(slideTransition.position.value, Offset.zero);
+      controller.dispose();
+    },
+  );
 }
