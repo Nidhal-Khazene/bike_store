@@ -6,6 +6,13 @@ class MyShoppingCartView extends StatelessWidget {
   static const routeName = "MyShoppingCartView";
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: MyShoppingCartViewBody());
+    return const Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: MyShoppingCartViewBody(),
+        ),
+      ),
+    );
   }
 }

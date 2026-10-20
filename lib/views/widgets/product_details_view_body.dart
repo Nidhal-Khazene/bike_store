@@ -1,10 +1,12 @@
 import 'package:bike_store/core/utils/app_text_styles.dart';
 import 'package:bike_store/core/utils/assets.dart';
 import 'package:bike_store/shared/widgets/custom_icon_container.dart';
+import 'package:bike_store/views/my_shopping_cart_view.dart';
 import 'package:bike_store/views/widgets/product_details_custom_bottom_sheet.dart';
 import 'package:bike_store/views/widgets/product_item.dart';
 import 'package:bike_store/views/widgets/sliding_product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:svg_flutter/svg.dart';
 
 class ProductDetailsViewBody extends StatefulWidget {
@@ -83,14 +85,15 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
                     ),
                   ),
                 ),
-                const SizedBox(width: 44),
+                SizedBox(width: 44.w),
               ],
             ),
           ),
           Positioned(
             child: SlidingProduct(
               slidingAnimation: slidingAnimation,
-              productImage: widget.product?.imagePath ??
+              productImage:
+                  widget.product?.imagePath ??
                   Assets.assetsImagesComponentRobertBicycle,
               isExpanded: isExpanded,
             ),
@@ -106,6 +109,9 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
                 setState(() {
                   isExpanded = value;
                 });
+              },
+              onAddToCart: () {
+                Navigator.pushNamed(context, MyShoppingCartView.routeName);
               },
             ),
           ),

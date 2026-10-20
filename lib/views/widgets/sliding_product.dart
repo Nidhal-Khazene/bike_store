@@ -22,18 +22,13 @@ class SlidingProduct extends StatelessWidget {
         child: AnimatedAlign(
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
-          alignment: isExpanded
-              ? const Alignment(0, -0.42)
-              : const Alignment(0, -0.08),
+          alignment: isExpanded ? Alignment(0, -0.50.h) : Alignment(0, -0.08.h),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
             width: isExpanded ? 250.w : 340.w,
             height: isExpanded ? 160.h : 230.h,
-            child: Image.asset(
-              productImage,
-              fit: BoxFit.contain,
-            ),
+            child: Image.asset(productImage, fit: BoxFit.contain),
           ),
         ),
       ),
