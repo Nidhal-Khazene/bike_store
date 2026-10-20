@@ -1,3 +1,4 @@
+import 'package:bike_store/views/my_shopping_cart_view.dart';
 import 'package:bike_store/views/product_details_view.dart';
 import 'package:bike_store/views/widgets/product_item.dart';
 import 'package:bike_store/views/home_view.dart';
@@ -16,7 +17,10 @@ Route<dynamic>? onGenerateRoutes(RouteSettings settings) {
         builder: (context) => ProductDetailsView(product: product),
         settings: settings,
       );
-
+    case MyShoppingCartView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const MyShoppingCartView(),
+      );
     default:
       return null;
   }
