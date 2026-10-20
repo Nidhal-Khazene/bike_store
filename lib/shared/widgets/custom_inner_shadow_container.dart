@@ -9,11 +9,13 @@ class CustomInnerShadowContainer extends StatelessWidget {
     required this.title,
     this.onTap,
     this.isSelected = false,
+    required this.isExpanded,
   });
 
   final String title;
   final VoidCallback? onTap;
   final bool isSelected;
+  final bool isExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +53,13 @@ class CustomInnerShadowContainer extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: AppTextStyles.regular15.copyWith(
-              color: isSelected
-                  ? Colors.white
-                  : Colors.white.withValues(alpha: 0.60),
+              color: isExpanded && isSelected
+                  ? const Color(0xFF3CA4EB)
+                  : Colors.white,
               letterSpacing: 0.35,
+              fontWeight: isExpanded && isSelected
+                  ? FontWeight.w700
+                  : FontWeight.w400,
             ),
           ),
         ),

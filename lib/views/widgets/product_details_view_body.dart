@@ -20,6 +20,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
+  bool isExpanded = false;
   @override
   void initState() {
     super.initState();
@@ -34,48 +35,82 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 64,
-          left: 16,
-          right: 16,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomIconContainer(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                icon: SvgPicture.asset(Assets.assetsImagesIconsArowwLeftIcon),
-              ),
-              Expanded(
-                child: Text(
-                  widget.product?.name ?? 'PEUGEOT - LR01',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.bold20.copyWith(
-                    letterSpacing: -0.30,
-                    color: Colors.white,
+    return PopScope(
+      canPop: !isExpanded,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        if (isExpanded) {
+          setState(() {
+            isExpanded = false;
+          });
+        }
+      },
+      child: Stack(
+        children: [
+          Positioned(
+            top: 64,
+            left: 16,
+            right: 16,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomIconContainer(
+                  onTap: () {
+                    if (isExpanded) {
+                      setState(() {
+                        isExpanded = false;
+                      });
+                    } else {
+                      Navigator.pop(context);
+                    }
+                  },
+                  icon: AnimatedRotation(
+                    turns: isExpanded ? -0.25 : 0.0,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: SvgPicture.asset(
+                      Assets.assetsImagesIconsArowwLeftIcon,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 44),
-            ],
+                Expanded(
+                  child: Text(
+                    widget.product?.name ?? 'PEUGEOT - LR01',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.bold20.copyWith(
+                      letterSpacing: -0.30,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 44),
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          child: SlidingProduct(
-            slidingAnimation: slidingAnimation,
-            productImage: widget.product!.imagePath,
+          Positioned(
+            child: SlidingProduct(
+              slidingAnimation: slidingAnimation,
+              productImage: widget.product?.imagePath ??
+                  Assets.assetsImagesComponentRobertBicycle,
+              isExpanded: isExpanded,
+            ),
           ),
-        ),
-        const Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: ProductDetailsCustomBottomSheet(),
-        ),
-      ],
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ProductDetailsCustomBottomSheet(
+              product: widget.product,
+              isExpanded: isExpanded,
+              onExpandedChanged: (value) {
+                setState(() {
+                  isExpanded = value;
+                });
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
