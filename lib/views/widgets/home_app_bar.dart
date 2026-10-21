@@ -12,9 +12,15 @@ class HomeAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          'Choose Your Bike',
-          style: AppTextStyles.bold20.copyWith(color: Colors.white),
+        Expanded(
+          child: FittedBox(
+            alignment: Alignment.centerLeft,
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Choose Your Bike',
+              style: AppTextStyles.bold20.copyWith(color: Colors.white),
+            ),
+          ),
         ),
         CustomIconContainer(
           icon: SvgPicture.asset(Assets.assetsImagesIconsSearchIcon),

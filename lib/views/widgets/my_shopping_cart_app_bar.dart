@@ -1,3 +1,4 @@
+import 'package:bike_store/core/utils/app_colors.dart';
 import 'package:bike_store/core/utils/app_text_styles.dart';
 import 'package:bike_store/core/utils/assets.dart';
 import 'package:bike_store/shared/widgets/custom_icon_container.dart';
@@ -15,13 +16,25 @@ class MyShoppingCartAppBar extends StatelessWidget {
       children: [
         CustomIconContainer(
           onTap: () => Navigator.pop(context),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.royalBlue.withValues(alpha: 0.35),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
           icon: SvgPicture.asset(Assets.assetsImagesIconsArowwLeftIcon),
         ),
-        Text(
-          'My Shopping Cart',
-          style: AppTextStyles.bold20.copyWith(color: Colors.white),
+        Expanded(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'My Shopping Cart',
+              style: AppTextStyles.bold20.copyWith(color: Colors.white),
+            ),
+          ),
         ),
-        SizedBox(width: 44.w),
+        SizedBox(width: 44.r),
       ],
     );
   }
